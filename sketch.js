@@ -2,12 +2,13 @@ var cat
 var mouse
 var garden
 function preload() {
-    tom1 = loadImage("tomOne.png")
-    tom2=loadImage("tomTwo.png")
-    jerry1 = loadImage("jerryOne.png")
-    jerry2 = loadImage("jerryTwo.png")
-    jerry3 = loadImage("jerryThree.png")
-    backdrop = loadImage("garden.png")
+    bg = loadImage("images/garden.png");
+    tomImg1= loadAnimation("images/tomOne.png");
+    tomImg2=loadAnimation("images/tomTwo.png","images/tomThree.png");
+    tomImg3= loadAnimation("images/tomFour.png");
+    jerryImg1=loadAnimation("images/jerryOne.png");
+    jerryImg2= loadAnimation("images/jerryTwo.png","images/jerryThree.png");
+    jerryImg3=loadAnimation("images/jerryFour.png");
 }
 
 function setup(){
@@ -19,11 +20,11 @@ function setup(){
 function draw() {
 
     background(255);
-    if(keyPressed("LEFT_ARROW")){
+    /*if(keyPressed("LEFT_ARROW")){
         cat.x = cat.x-4
         cat.addImage(tom2)
         mouse.addImage(jerry3)
-    }
+    }*/
     if (cat.x-mouse.x<cat.width/2+mouse.width/2){
         mouse.addImage(jerry1)
         cat.addImage(tom1)
@@ -31,11 +32,16 @@ function draw() {
 
     drawSprites();
 }
-
-
 function keyPressed(){
 
-  //For moving and changing animation write code here
-
-
+    if(keyCode === LEFT_ARROW){
+        tom.velocityX = -5; 
+        tom.addAnimation("tomRunning", tomImg2);
+        tom.changeAnimation("tomRunning");
+        
+        jerry.addAnimation("jerryTeasing", jerryImg2);
+        jerry.frameDelay = 25;
+        jerry.changeAnimation("jerryTeasing");
+    }
 }
+
